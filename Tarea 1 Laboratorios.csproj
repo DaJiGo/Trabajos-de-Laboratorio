@@ -1,0 +1,102 @@
+﻿using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Array para almacenar los 10 números
+        int[] numeros = new int[10];
+
+        Console.WriteLine("=== PROGRAMA DE ORDENAMIENTO DE NÚMEROS ===");
+        Console.WriteLine("Ingrese 10 números enteros:");
+
+        // Leer los 10 números del usuario
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write($"Número {i + 1}: ");
+            while (!int.TryParse(Console.ReadLine(), out numeros[i]))
+            {
+                Console.Write("Por favor, ingrese un número válido: ");
+            }
+        }
+
+        // Mostrar números originales
+        Console.WriteLine("\n--- NÚMEROS ORIGINALES ---");
+        MostrarArray(numeros);
+
+        // Crear copias del array para ordenar
+        int[] numerosAscendente = new int[10];
+        int[] numerosDescendente = new int[10];
+
+        // Copiar el array original
+        Array.Copy(numeros, numerosAscendente, 10);
+        Array.Copy(numeros, numerosDescendente, 10);
+
+        // Ordenar de forma ascendente
+        OrdenarAscendente(numerosAscendente);
+
+        // Ordenar de forma descendente
+        OrdenarDescendente(numerosDescendente);
+
+        // Mostrar resultados
+        Console.WriteLine("\n--- ORDENAMIENTO ASCENDENTE ---");
+        MostrarArray(numerosAscendente);
+
+        Console.WriteLine("\n--- ORDENAMIENTO DESCENDENTE ---");
+        MostrarArray(numerosDescendente);
+
+        Console.WriteLine("\nPresione cualquier tecla para salir...");
+        Console.ReadKey();
+    }
+
+    // Método para ordenar de forma ascendente (Bubble Sort)
+    static void OrdenarAscendente(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                {
+                    // Intercambiar elementos
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // Método para ordenar de forma descendente (Bubble Sort)
+    static void OrdenarDescendente(int[] arr)
+    {
+        int n = arr.Length;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (arr[j] < arr[j + 1])
+                {
+                    // Intercambiar elementos
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    // Método para mostrar el contenido del array
+    static void MostrarArray(int[] arr)
+    {
+        Console.Write("[ ");
+        for (int i = 0; i < arr.Length; i++)
+        {
+            Console.Write(arr[i]);
+            if (i < arr.Length - 1)
+                Console.Write(", ");
+        }
+        Console.WriteLine(" ]");
+    }
+}
